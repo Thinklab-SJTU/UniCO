@@ -28,7 +28,7 @@ Prior to training/testing, run:
 gcc utils/base_methods.c -o libtsp.so -fPIC -shared
 ```
 #### MatNet-POE
-Run following lines for your quicks reference on TSP-20:
+Run following lines for your quick reference on TSP-20:
 ```
 cd MatNet-POE
 python train.py
