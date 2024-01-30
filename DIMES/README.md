@@ -1,1 +1,1 @@
-This module is implemented on the basis of [DIMES]('https://github.com/DIMESTeam/DIMES').
+This module is implemented on the basis of [DIMES](https://github.com/DIMESTeam/DIMES).
