@@ -154,15 +154,7 @@ class ATSPEnv:
                 problems[i] = problems[i][init_tour, :][:, init_tour]
         # problems
         self.problems = torch.Tensor(np.array(problems))
-
-    def load_problems(self, batch_size):
-        self.batch_size = batch_size
-        self.BATCH_IDX = torch.arange(self.batch_size)[:, None].expand(self.batch_size, self.node_cnt)
-        self.POMO_IDX = torch.arange(self.node_cnt)[None, :].expand(self.batch_size, self.node_cnt)
-
-        problem_gen_params = self.env_params['problem_gen_params']
-        self.problems = get_random_problems(batch_size, self.node_cnt, problem_gen_params)
-        # shape: (batch, node, node)
+        self.ori_problems = problems
 
     def load_problems_manual(self, problems):
         # problems.shape: (batch, node, node)
@@ -187,6 +179,7 @@ class ATSPEnv:
             f_solver = solver.solve_farthest_insertion
         else:
             raise NotImplementedError("Solver {} is not implemented.".format(self.env_params["init_solver"]))
+        self.ori_problems = problems
         if self.env_params["init_solver"]:
             for i in range(self.batch_size):
                 f_solver(problems[i])
@@ -207,7 +200,7 @@ class ATSPEnv:
 
         reward = None
         done = False
-        return Reset_State(problems=self.problems), reward, done
+        return Reset_State(problems=self.ori_problems), reward, done
 
     def _create_step_state(self):
         self.step_state = Step_State(BATCH_IDX=self.BATCH_IDX, POMO_IDX=self.POMO_IDX)
@@ -254,7 +247,7 @@ class ATSPEnv:
         batch_index = self.BATCH_IDX[:, :, None].expand(self.batch_size, self.node_cnt, self.node_cnt)
         # shape: (batch, pomo, node)
 
-        selected_cost = self.problems[batch_index, node_from, node_to]
+        selected_cost = self.ori_problems[batch_index, node_from, node_to]
         # shape: (batch, pomo, node)
         total_distance = selected_cost.sum(2)
         # shape: (batch, pomo)
