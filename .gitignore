@@ -8,3 +8,11 @@ __pycache__/
 # .zip or .gz
 *.zip
 *.gz
+
+# MatDIFFNet
+MatDIFFNet/weights/**
+MatDIFFNet/test_dataset/**
+MatDIFFNet/log/**
+MatDIFFNet/wandb/**
+MatDIFFNet/train_ckpts/**
+*.out

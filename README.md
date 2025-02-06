@@ -19,21 +19,32 @@ This repository provides the implementation of **MatPOENet**, **MatDIFFNet** and
 
 ## Experimental Environment
 
-TODO (dependencies, etc)
+- MatDIFFNet
+```bash
+pip install torch==2.0.1
+pip install scipy==1.10.1
+pip install --no-index torch-scatter -f https://pytorch-geometric.com/whl/torch-2.0.1+cu117.html
+pip install --no-index torch-sparse -f https://pytorch-geometric.com/whl/torch-2.0.1+cu117.html
+pip install --no-index torch-spline-conv -f https://pytorch-geometric.com/whl/torch-2.0.1+cu117.html
+pip install --no-index torch-cluster -f https://pytorch-geometric.com/whl/torch-2.0.1+cu117.html
+pip install wandb==0.16.3
+pip install pytorch-lightning==2.0.1
+pip install ml4co-kit
+```
 
 ## Pre-trained Weights
 - MatPOENet: Pre-trained weights can be downloaded [here](https://drive.google.com/file/d/16mDY9HVzDdyFnqrL6YnrQ2lS8twscD_o/view?usp=sharing).
 
-- MatDIFFNet: Pre-trained weights can be downloaded [here]().
+- MatDIFFNet: Pre-trained weights can be downloaded [here](https://drive.google.com/drive/folders/1YHzcji4rqL2hxMpZWpZcmp7KKvv8ukJT?usp=sharing).
 
 - UniCO-DIMES: Pre-trained weights are provided with codes. 
 
 Please place the unzipped `.pt` files under `ckpts` folder for evaluation. 
 
-## Datasets
-- Test Datasets. `N = 20` data are provided with codes (./data). Please download datasets for other scales [here](https://drive.google.com/file/d/17LINJtArttm8ba6VEQ4XdfGjuz-ZMl3I/view?usp=sharing) and place `val_sets` and `test_sets` under `data` folder for full evaluation and testing. 
+## Test Datasets
+- MatPOENet. `N = 20` data are provided with codes (./data). Please download datasets for other scales [here](https://drive.google.com/file/d/17LINJtArttm8ba6VEQ4XdfGjuz-ZMl3I/view?usp=sharing) and place `val_sets` and `test_sets` under `data` folder for full evaluation and testing. 
 
-- Training Datasets. For MatPOENet and UniCO-DIMES, training data are randomly generated on the fly. For MatDIFFNet, the training data can be downloaded [here]().
+- MatDIFFNet: Please download datasets [here](https://drive.google.com/drive/folders/1HI-0GR9rh9HLFM7ouf8Jpn4WAY1CuDf4?usp=sharing) 
 
 ## Quickstart 
 
