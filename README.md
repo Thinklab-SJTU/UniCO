@@ -2,8 +2,6 @@
 
 This is the official implementation of our **ICLR 2025** paper "[UniCO: On Unified Combinatorial Optimization via Problem Reduction to Matrix-Encoded General TSP](TODO)".
 
-Authors: Wenzheng Pan*, Hao Xiong*, Jiale Ma, Wentao Zhao, Yang Li, Junchi Yan
-
 ## Brief Introduction
 **Abstract:** Various neural solvers have been devised for combinatorial optimization (CO), which are often tailored for specific problem types, ranging from TSP, CVRP to SAT, etc. Yet, it remains an open question how to achieve universality regarding problem representing and learning with a general framework. This paper first proposes **UniCO**, to unify a set of CO problems by reducing them into the general TSP form featured by distance matrices. The applicability of this strategy is dependent on the efficiency of the problem reduction and solution transition procedures, which we show that at least ATSP, HCP, and SAT are readily feasible. The hope is to allow for the effective and even simultaneous use of as many types of CO instances as possible to train a neural TSP solver, and optionally finetune it for specific problem types. In particular, unlike the prevalent TSP benchmarks based on Euclidean instances with 2-D coordinates, our focused domain of general TSP could involve non-metric, asymmetric or discrete distances without explicit node coordinates, which is much less explored in TSP literature while poses new intellectual challenges. Along this direction, we devise two neural TSP solvers with and without supervision to conquer such matrix-formulated input, respectively: 1) **MatPOENet** and 2) **MatDIFFNet**. The former is a reinforcement learning-based sequential model with pseudo one-hot embedding (POE) scheme; and the latter is a Diffusion-based generative model with the mix-noised reference mapping scheme. Extensive experiments on ATSP, 2DTSP, HCP- and SAT-distributed general TSPs demonstrate the strong ability of our approaches towards arbitrary matrix-encoded TSP with structure and size variation.
 
@@ -56,14 +54,6 @@ We provide the full test data for fair and consistent comparison of future resea
 - For UniCO-MatDIFFNet, training data of binary distances (i.e., HCP and SAT) are generated on the fly, while training data for TSP and ATSP require preparation in advance by running `utils/generate_data.py`. Note that the datasets are generated in txt format and need to be specified in `MatDIFFNet/train.py`.
 
 ## Quickstart 
-
-<!-- Note that you can modify arguments specified in `train.py` and `test.py` respectively for customized execution. -->
-
-<!-- Prior to training/testing, run:
-```
-gcc utils/base_methods.c -o libtsp.so -fPIC -shared
-``` -->
-
 ### UniCO-MatPOENet
 Run following lines for your quick reference on TSP-20:
 ```
@@ -79,7 +69,6 @@ cd MatDIFFNet
 python train.py
 python test.py
 ```
-
 
 ### UniCO-DIMES
 Run following lines for your quick reference on TSP-20:
@@ -100,5 +89,3 @@ booktitle={The Thirteenth International Conference on Learning Representations},
 year={2025},
 }
 ```
-
-<!-- Training results and checkpoints shall be stored in `result` folder for either model. -->
