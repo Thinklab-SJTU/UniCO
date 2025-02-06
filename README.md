@@ -5,6 +5,13 @@ This is the official implementation of our **ICLR 2025** paper "[UniCO: On Unifi
 # Brief Introduction
 This paper first proposes **UniCO**, to unify a set of CO problems by reducing them into the general TSP form featured by distance matrices. The applicability of this strategy is dependent on the efficiency of the problem reduction and solution transition procedures, which we show that at least ATSP, HCP, and SAT are readily feasible. The hope is to allow for the effective and even simultaneous use of as many types of CO instances as possible to train a neural TSP solver, and optionally finetune it for specific problem types. In particular, unlike the prevalent TSP benchmarks based on Euclidean instances with 2-D coordinates, our focused domain of general TSP could involve non-metric, asymmetric or discrete distances without explicit node coordinates, which is much less explored in TSP literature while poses new intellectual challenges. Along this direction, we devise two neural TSP solvers with and without supervision to conquer such matrix-formulated input, respectively: 1) **MatPOENet** and 2) **MatDIFFNet**. The former is a reinforcement learning-based sequential model with pseudo one-hot embedding (POE) scheme; and the latter is a Diffusion-based generative model with the mix-noised reference mapping scheme.
 
+![fig1](./imgs/pics-framework.png)
+Fig 1. The 3-step workflow of the UniCO learning framework.
+
+![fig2](imgs/pics-model-structure.png)
+Fig 2. General structure of the two proposed instantiation models, MatPOENet and MatDIFFNet, for UniCO.
+
+
 This repository provides the implementation of **MatPOENet**, **MatDIFFNet** and **UniCO-DIMES**. Evaluation are conducted on **ATSP, 2DTSP, HCP- and SAT-distributed general TSPs**.
 
 # Experimental Environment
@@ -63,7 +70,13 @@ python test.py
 # Citation and Credits
 If you find this work useful, please cite our paper as:
 ```
-TODO
+@inproceedings{
+pan2025UniCO,
+title={UniCO: On Unified Combinatorial Optimization via Problem Reduction to Matrix-Encoded General TSP},
+author={Wenzheng Pan and Hao Xiong and Jiale Ma and Wentao Zhao and Yang Li and Junchi Yan},
+booktitle={The Thirteenth International Conference on Learning Representations},
+year={2025},
+}
 ```
 
 <!-- Training results and checkpoints shall be stored in `result` folder for either model. -->
