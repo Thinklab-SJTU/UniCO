@@ -107,19 +107,19 @@ class ATSPTrainer:
             self.result_log.append('train_score', epoch, train_score)
             self.result_log.append('train_loss', epoch, train_loss)
 
-            # Validation
-            if epoch % val_interval == 0:
-                cls = ['atsp', 'tsp2d', 'hcp', '3sat']
-                val_score, val_score_aug, cls_scores = self._validation(dir=val_dir)
-                self.result_log.append('val_score', epoch, val_score)
-                self.result_log.append('val_score_aug', epoch, val_score_aug)
-                self.result_log.append('val_score_atsp', epoch, cls_scores[0].item())
-                self.result_log.append('val_score_euc', epoch, cls_scores[1].item())
-                self.result_log.append('val_score_hcp', epoch, cls_scores[2].item())
-                self.result_log.append('val_score_3sat', epoch, cls_scores[3].item())
-                self.logger.info(f'val_score: {val_score:.4f}, val_score_aug: {val_score_aug:.4f}')
-                for i in range(4):
-                    self.logger.info(f'{cls[i]}: {cls_scores[i]:.4f}')
+            # Validation TODO
+            # if epoch % val_interval == 0:
+            #     cls = ['atsp', 'tsp2d', 'hcp', '3sat']
+            #     val_score, val_score_aug, cls_scores = self._validation(dir=val_dir)
+            #     self.result_log.append('val_score', epoch, val_score)
+            #     self.result_log.append('val_score_aug', epoch, val_score_aug)
+            #     self.result_log.append('val_score_atsp', epoch, cls_scores[0].item())
+            #     self.result_log.append('val_score_euc', epoch, cls_scores[1].item())
+            #     self.result_log.append('val_score_hcp', epoch, cls_scores[2].item())
+            #     self.result_log.append('val_score_3sat', epoch, cls_scores[3].item())
+            #     self.logger.info(f'val_score: {val_score:.4f}, val_score_aug: {val_score_aug:.4f}')
+            #     for i in range(4):
+            #         self.logger.info(f'{cls[i]}: {cls_scores[i]:.4f}')
 
             ############################
             # Logs & Checkpoint
@@ -139,16 +139,14 @@ class ATSPTrainer:
                                     self.result_log, labels=['train_score'])
                 util_save_log_image_with_label(image_prefix, self.trainer_params['logging']['log_image_params_2'],
                                     self.result_log, labels=['train_loss'])
-                if epoch % val_interval == 0:
-                    util_save_log_image_with_label(image_prefix, self.trainer_params['logging']['log_image_params_1'],
-                                        self.result_log, labels=['val_score'])
-                    for cls in ['atsp', 'euc', 'hcp', '3sat']:
-                        util_save_log_image_with_label(image_prefix, self.trainer_params['logging']['log_image_params_1'],
-                                            self.result_log, labels=[f'val_score_{cls}'])
+                # if epoch % val_interval == 0:
+                #     util_save_log_image_with_label(image_prefix, self.trainer_params['logging']['log_image_params_1'],
+                #                         self.result_log, labels=['val_score'])
+                #     for cls in ['atsp', 'euc', 'hcp', '3sat']:
+                #         util_save_log_image_with_label(image_prefix, self.trainer_params['logging']['log_image_params_1'],
+                #                             self.result_log, labels=[f'val_score_{cls}'])
 
-            if all_done or (epoch % val_interval == 0 and val_score < self.best_score) or \
-                epoch % model_save_interval == 0:
-            # if all_done or (epoch % model_save_interval) == 0:
+            if epoch % model_save_interval == 0:
                 self.logger.info("Saving trained_model")
                 checkpoint_dict = {
                     'epoch': epoch,
@@ -157,13 +155,8 @@ class ATSPTrainer:
                     'scheduler_state_dict': self.scheduler.state_dict(),
                     'result_log': self.result_log.get_raw_data()
                 }
-                if epoch % 5 == 0 and val_score < self.best_score:
-                    torch.save(checkpoint_dict,
-                           f'{self.result_folder}/checkpoint-best.pt')
-                    self.best_score = val_score
-                else:
-                    torch.save(checkpoint_dict,
-                           f'{self.result_folder}/checkpoint-{epoch}.pt')
+                torch.save(checkpoint_dict,
+                    f'{self.result_folder}/checkpoint-{epoch}.pt')
 
             if all_done:
                 self.logger.info(" *** Training Done *** ")

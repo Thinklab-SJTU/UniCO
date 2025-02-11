@@ -30,7 +30,7 @@ THE SOFTWARE.
 
 DEBUG_MODE = False
 USE_CUDA = not DEBUG_MODE
-CUDA_DEVICE_NUM = 1
+CUDA_DEVICE_NUM = 2
 
 
 ##########################################################################################
@@ -60,7 +60,7 @@ warnings.filterwarnings('ignore')
 env_params = {
     'max_scale': 21,
     'min_scale': 20,
-    'problem_pool': ["atsp_triangle", "tsp_euc", "hcp", "3sat"], # "hcp", "atsp_triangle", "3sat"], # atsp_triangle, tsp_euc ["atsp_uniform", "hcp", "3sat", "2dtsp"]
+    'problem_pool': ["atsp_triangle", "tsp_euc", "hcp", "3sat"],
     "init_solver": 'nn', # choices [None, "nn", "lkh", "ni", "fi"]:
     "pos_embedding_dim": 512,
 
@@ -75,7 +75,7 @@ env_params = {
 model_params = {
     'pos_embedding_dim': env_params["pos_embedding_dim"],
     'embedding_dim': 512,
-    'sqrt_embedding_dim': 256**(1/2),
+    'sqrt_embedding_dim': 512**(1/2),
     'encoder_layer_num': 8,
     'qkv_dim': 16,
     'sqrt_qkv_dim': 16**(1/2),
@@ -90,7 +90,7 @@ model_params = {
 
 optimizer_params = {
     'optimizer': {
-        'lr': 3*1e-4,
+        'lr': 4*1e-4,
         'weight_decay': 1e-6
     },
     'scheduler': {
@@ -103,8 +103,8 @@ trainer_params = {
     'use_cuda': USE_CUDA,
     'cuda_device_num': CUDA_DEVICE_NUM,
     'epochs': 1000,
-    'train_episodes': 10*10,
-    'train_batch_size': 10,
+    'train_episodes': 10*1000,
+    'train_batch_size': 200,
     'val_interval': 1,
     'val_dir': '../data/val_set/{}_2000',
     'logging': {
