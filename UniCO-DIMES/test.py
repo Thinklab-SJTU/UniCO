@@ -10,6 +10,8 @@ from model import Net
 from train import net_test
 from utils.utils import Dict
 
+NUM_NODES = 20
+
 ckpts = {
     20: '../ckpts/DIMES_20.pt',
     50: '../ckpts/DIMES_50.pt',
@@ -17,7 +19,7 @@ ckpts = {
 }
 
 test_args = Dict(
-    n_nodes = 20,
+    n_nodes = NUM_NODES,
     opt_outer_fn = lambda par: optim.AdamW(par, lr=1e-3, weight_decay=5e-4),
     opt_inner_fn = lambda par: optim.AdamW(par, lr=0.5, weight_decay=0.),
     test_batch_size = 100,
@@ -26,8 +28,8 @@ test_args = Dict(
     act = F.leaky_relu,
     units = 64,
     depth = 8,
-    ckpt_path = ckpts[20],
-    device = torch.device('cuda:1' if torch.cuda.is_available() else 'cpu')
+    ckpt_path = ckpts[NUM_NODES],
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 )
 
 if __name__ == '__main__':

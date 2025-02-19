@@ -7,6 +7,7 @@ import torch.nn.functional as F
 import matplotlib.pyplot as plt
 import seaborn as sns
 import datetime
+import os
 import sys
 
 sys.path.insert(0, "..")
@@ -119,11 +120,6 @@ def tsp_optim(adj, ze0, opt_fn, steps, samples, epsilon=0., device=None):
         J.backward()
         opt.step()
 
-    # ts = np.arange(1, steps + 1)
-    # sns.lineplot(x = ts, y = y_means)
-    # print(y_means)
-    # plt.title('E[y] vs step')
-    # plt.savefig('step_score')
     return ze
 
 def net_train(args, net):
