@@ -76,7 +76,7 @@ env_params = {
 model_params = {
     'pos_embedding_dim': env_params["pos_embedding_dim"],
     'embedding_dim': 512,
-    'sqrt_embedding_dim': 256**(1/2),
+    'sqrt_embedding_dim': 512**(1/2),
     'encoder_layer_num': 5 if env_params['node_cnt'] > 50 else 8,
     'qkv_dim': 16,
     'sqrt_qkv_dim': 16**(1/2),
@@ -92,7 +92,7 @@ model_params = {
 tester_params = {
     'use_cuda': USE_CUDA,
     'cuda_device_num': CUDA_DEVICE_NUM,
-    'model_load': f'/mnt/nas2/home/panwenzheng/GCO/ckpts/MatNet-POE_{env_params["node_cnt"]}.pt',
+    'model_load': f'../ckpts/MatNet-POE_{env_params["node_cnt"]}.pt',
     'saved_problem_folder': f'../data/test_set/{env_params["node_cnt"]}_10000',
     'saved_problem_filename': '{}.atsp',
     'file_count': 10*1000,
