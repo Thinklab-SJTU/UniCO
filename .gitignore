@@ -16,3 +16,6 @@ MatDIFFNet/log/**
 MatDIFFNet/wandb/**
 MatDIFFNet/train_ckpts/**
 *.out
+
+# result
+*/result/**

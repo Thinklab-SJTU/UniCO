@@ -32,6 +32,11 @@ pip install wandb==0.16.3
 pip install pytorch-lightning==2.0.1
 pip install ml4co-kit
 ```
+- **New!** We have added the implementation of both MatPOENet and MatDIFFNet upon [Jittor](https://cg.cs.tsinghua.edu.cn/jittor/), a high-performance deep learning framework based on JIT compiling and meta-operators, as a parallel alternative to PyTorch for your research and development needs. Jittor can be installed via
+```
+python -m pip install jittor
+```
+Our implementation is supported by Jittor-1.3.9.14.
 
 ## Pre-trained Weights
 - MatPOENet: Pre-trained weights can be downloaded [here](https://drive.google.com/file/d/16mDY9HVzDdyFnqrL6YnrQ2lS8twscD_o/view?usp=sharing).
@@ -57,7 +62,7 @@ We provide the full test data for fair and consistent comparison of future resea
 ### UniCO-MatPOENet
 Run following lines for your quick reference on TSP-20:
 ```
-cd MatPOENet
+cd MatPOENet # or MatPOENet_jittor
 python train.py
 python test.py
 ```
@@ -65,7 +70,7 @@ python test.py
 ### UniCO-MatDIFFNet
 Run following lines for your quick reference on TSP-50:
 ```
-cd MatDIFFNet
+cd MatDIFFNet # or MatDIFFNet_jittor
 python train.py
 python test.py
 ```
