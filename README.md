@@ -88,7 +88,7 @@ If you find this work useful, please cite our paper as:
 ```
 @inproceedings{
 pan2025unico,
-title={UniCO: On Unified Combinatorial Optimization via Problem Reduction to Matrix-Encoded General TSP},
+title={Uni{CO}: On Unified Combinatorial Optimization via Problem Reduction to Matrix-Encoded General {TSP}},
 author={Wenzheng Pan and Hao Xiong and Jiale Ma and Wentao Zhao and Yang Li and Junchi Yan},
 booktitle={The Thirteenth International Conference on Learning Representations},
 year={2025},
